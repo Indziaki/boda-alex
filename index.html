@@ -356,11 +356,208 @@
     .cards-grid { grid-template-columns: 1fr; }
     .countdown-grid { gap: 1.5rem; }
   }
+
+
+        /* Fullscreen container for fireworks */
+        .fireworks-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+        }
+
+        /* Base Firework Styling */
+        .firework {
+            position: absolute;
+            width: 15vw;
+            min-width: 150px;
+            max-width: 250px;
+            aspect-ratio: 1;
+            transform: translate(-50%, -50%);
+            filter: drop-shadow(0 0 4px var(--color)) drop-shadow(0 0 12px var(--color));
+        }
+
+        /* --- ANIMATION CHOREOGRAPHY --- */
+
+        /* 1. The Launch Trail */
+        .trail {
+            stroke: var(--color);
+            stroke-width: 2;
+            stroke-linecap: round;
+            opacity: 0;
+            animation: trail-up 2.5s infinite ease-out;
+        }
+
+        @keyframes trail-up {
+            0% {
+                transform: translateY(120px);
+                opacity: 0;
+            }
+            5% {
+                opacity: 1;
+            }
+            30% {
+                transform: translateY(0px);
+                opacity: 0.3;
+            }
+            31%, 100% {
+                opacity: 0;
+            }
+        }
+
+        /* 2. The Particle Burst */
+        .particle {
+            fill: var(--color);
+            transform-origin: 100px 100px;
+            opacity: 0;
+            animation: burst 2.5s infinite cubic-bezier(0.1, 0.8, 0.3, 1);
+        }
+
+        @keyframes burst {
+            0%, 30% {
+                transform: translate(0, 0);
+                opacity: 0;
+            }
+            32% {
+                opacity: 1;
+            }
+            85% {
+                opacity: 1;
+            }
+            100% {
+                /* Moves particles to their CSS variable coordinates + adds gravity drift */
+                transform: translate(var(--dx), calc(var(--dy) + 25px));
+                opacity: 0;
+            }
+        }
+
+        /* --- STAGGERING & POSITIONING --- */
+        
+        .fw-1 { --color: #ff0055; left: 25%; top: 30%; }
+        .fw-1 .trail, .fw-1 .particle { animation-delay: 0.0s; }
+
+        .fw-2 { --color: #00f3ff; left: 70%; top: 25%; }
+        .fw-2 .trail, .fw-2 .particle { animation-delay: 0.5s; }
+
+        .fw-3 { --color: #ffca00; left: 50%; top: 45%; }
+        .fw-3 .trail, .fw-3 .particle { animation-delay: 1.0s; }
+
+        .fw-4 { --color: #b600ff; left: 15%; top: 60%; }
+        .fw-4 .trail, .fw-4 .particle { animation-delay: 1.4s; }
+
+        .fw-5 { --color: #00ff66; left: 80%; top: 55%; }
+        .fw-5 .trail, .fw-5 .particle { animation-delay: 1.9s; }
 </style>
 </head>
 <body>
 <!-- ── HERO ── -->
 <section class="hero">
+
+    <div class="fireworks-container">
+
+        <svg class="firework fw-1" viewBox="0 0 200 200">
+            <line x1="100" y1="100" x2="100" y2="120" class="trail" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 0px; --dy: -75px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 53px; --dy: -53px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 75px; --dy: 0px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 53px; --dy: 53px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 0px; --dy: 75px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: -53px; --dy: 53px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: -75px; --dy: 0px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: -53px; --dy: -53px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 0px; --dy: -40px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 28px; --dy: -28px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 40px; --dy: 0px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 28px; --dy: 28px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 0px; --dy: 40px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: -28px; --dy: 28px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: -40px; --dy: 0px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: -28px; --dy: -28px;" />
+        </svg>
+
+        <svg class="firework fw-2" viewBox="0 0 200 200">
+            <line x1="100" y1="100" x2="100" y2="120" class="trail" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 0px; --dy: -75px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 53px; --dy: -53px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 75px; --dy: 0px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 53px; --dy: 53px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 0px; --dy: 75px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: -53px; --dy: 53px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: -75px; --dy: 0px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: -53px; --dy: -53px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 0px; --dy: -40px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 28px; --dy: -28px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 40px; --dy: 0px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 28px; --dy: 28px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 0px; --dy: 40px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: -28px; --dy: 28px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: -40px; --dy: 0px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: -28px; --dy: -28px;" />
+        </svg>
+
+        <svg class="firework fw-3" viewBox="0 0 200 200">
+            <line x1="100" y1="100" x2="100" y2="120" class="trail" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 0px; --dy: -75px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 53px; --dy: -53px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 75px; --dy: 0px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 53px; --dy: 53px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 0px; --dy: 75px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: -53px; --dy: 53px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: -75px; --dy: 0px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: -53px; --dy: -53px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 0px; --dy: -40px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 28px; --dy: -28px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 40px; --dy: 0px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 28px; --dy: 28px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 0px; --dy: 40px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: -28px; --dy: 28px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: -40px; --dy: 0px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: -28px; --dy: -28px;" />
+        </svg>
+
+        <svg class="firework fw-4" viewBox="0 0 200 200">
+            <line x1="100" y1="100" x2="100" y2="120" class="trail" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 0px; --dy: -75px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 53px; --dy: -53px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 75px; --dy: 0px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 53px; --dy: 53px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 0px; --dy: 75px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: -53px; --dy: 53px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: -75px; --dy: 0px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: -53px; --dy: -53px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 0px; --dy: -40px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 28px; --dy: -28px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 40px; --dy: 0px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 28px; --dy: 28px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 0px; --dy: 40px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: -28px; --dy: 28px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: -40px; --dy: 0px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: -28px; --dy: -28px;" />
+        </svg>
+
+        <svg class="firework fw-5" viewBox="0 0 200 200">
+            <line x1="100" y1="100" x2="100" y2="120" class="trail" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 0px; --dy: -75px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 53px; --dy: -53px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 75px; --dy: 0px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 53px; --dy: 53px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: 0px; --dy: 75px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: -53px; --dy: 53px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: -75px; --dy: 0px;" />
+            <circle cx="100" cy="100" r="2" class="particle" style="--dx: -53px; --dy: -53px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 0px; --dy: -40px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 28px; --dy: -28px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 40px; --dy: 0px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 28px; --dy: 28px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: 0px; --dy: 40px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: -28px; --dy: 28px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: -40px; --dy: 0px;" />
+            <circle cx="100" cy="100" r="1.5" class="particle" style="--dx: -28px; --dy: -28px;" />
+        </svg>
+
+    </div>
   <img src="cropped-repeat-border-edge-1.png" alt="" aria-hidden="true" style="position: absolute; top:0%; width: 100%;" />
 
   <!-- Heart-shaped photo background -->
