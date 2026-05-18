@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Abigail & Alexis — Boda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet" />
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF6F0;
+    --blush: #E8D5C4;
+    --dusty-rose: #C4967A;
+    --deep: #3B2D28;
+    --warm-mid: #7A5C4E;
+    --gold: #B8935A;
+    --gold-light: #E8D5A3;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--deep);
+    font-family: var(--sans);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3rem 2rem;
+    overflow: hidden;
+  }
+
+  .hero-heart-bg {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-heart-bg svg {
+    width: min(600px, 90vw);
+    height: auto;
+    opacity: 0.6;
+    animation: heartFadeIn 2s ease both;
+  }
+
+  @keyframes heartFadeIn {
+    from { opacity: 0; transform: scale(0.92); }
+    to   { opacity: 0.6; transform: scale(1); }
+  }
+
+  .frame { z-index: 2; }
+  .ornament, .hero-overline, .hero-names, .ampersand,
+  .divider-line, .hero-date, .hero-subdate { position: relative; z-index: 2; }
+
+  /* Decorative border frame */
+  .frame {
+    position: absolute;
+    inset: 1.5rem;
+    border: 1px solid var(--blush);
+    pointer-events: none;
+  }
+  .frame::before, .frame::after {
+    content: '';
+    position: absolute;
+    width: 48px; height: 48px;
+    border-color: var(--gold);
+    border-style: solid;
+  }
+  .frame::before {
+    top: -1px; left: -1px;
+    border-width: 2px 0 0 2px;
+  }
+  .frame::after {
+    bottom: -1px; right: -1px;
+    border-width: 0 2px 2px 0;
+  }
+
+  /* Floral SVG ornaments */
+  .ornament {
+    width: 180px;
+    opacity: 0.55;
+    margin: 0 auto 1.5rem;
+    animation: fadeUp 1.2s ease both;
+  }
+
+  .hero-overline {
+    font-family: var(--sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--dusty-rose);
+    margin-bottom: 1.2rem;
+    animation: fadeUp 1s ease both;
+    animation-delay: 0.1s;
+  }
+
+  .hero-names {
+    font-family: var(--serif);
+    font-size: clamp(3.5rem, 10vw, 7rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    color: var(--deep);
+    animation: fadeUp 1s ease both;
+    animation-delay: 0.2s;
+  }
+
+  .hero-names em {
+    font-style: italic;
+    color: var(--warm-mid);
+  }
+
+  .ampersand {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 6vw, 4rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--gold);
+    display: block;
+    line-height: 1.4;
+  }
+
+  .divider-line {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin: 2rem auto;
+    width: min(320px, 80%);
+    animation: fadeUp 1s ease both;
+    animation-delay: 0.4s;
+  }
+  .divider-line::before, .divider-line::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+  }
+  .divider-diamond {
+    width: 6px; height: 6px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  .hero-date {
+    font-family: var(--serif);
+    font-size: clamp(1.1rem, 3vw, 1.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--warm-mid);
+    letter-spacing: 0.05em;
+    animation: fadeUp 1s ease both;
+    animation-delay: 0.5s;
+  }
+
+  .hero-subdate {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--dusty-rose);
+    margin-top: 0.4rem;
+    animation: fadeUp 1s ease both;
+    animation-delay: 0.6s;
+  }
+
+  /* ── DETAILS SECTION ── */
+  .details {
+    padding: 5rem 2rem 6rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    text-align: center;
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--dusty-rose);
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    text-align: center;
+    font-family: var(--serif);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--deep);
+    margin-bottom: 3rem;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .detail-card {
+    background: #fff;
+    border: 1px solid var(--blush);
+    border-radius: 2px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .detail-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(59,45,40,0.08);
+  }
+
+  .detail-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 40px; height: 2px;
+    background: var(--gold);
+    border-radius: 1px;
+  }
+
+  .card-icon {
+    display: block;
+    margin: 0 auto 1.2rem;
+    opacity: 0.5;
+  }
+
+  .card-label {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--dusty-rose);
+    margin-bottom: 0.6rem;
+  }
+
+  .card-main {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: var(--deep);
+    line-height: 1.3;
+  }
+
+  .card-sub {
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    color: var(--warm-mid);
+    margin-top: 0.5rem;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ── COUNTDOWN ── */
+  .countdown-section {
+    background: var(--deep);
+    padding: 4.5rem 2rem;
+    text-align: center;
+  }
+
+  .countdown-label {
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    opacity: 0.7;
+    margin-bottom: 2rem;
+  }
+
+  .countdown-grid {
+    display: flex;
+    justify-content: center;
+    gap: clamp(1rem, 4vw, 3rem);
+    flex-wrap: wrap;
+  }
+
+  .countdown-unit {
+    text-align: center;
+  }
+
+  .countdown-num {
+    font-family: var(--serif);
+    font-size: clamp(3rem, 8vw, 5rem);
+    font-weight: 300;
+    color: var(--gold-light);
+    line-height: 1;
+    display: block;
+  }
+
+  .countdown-word {
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--blush);
+    opacity: 0.6;
+    margin-top: 0.4rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 3rem 2rem 4rem;
+    text-align: center;
+  }
+
+  .footer-names {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--warm-mid);
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-note {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.15em;
+    color: var(--dusty-rose);
+    opacity: 0.7;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .frame { inset: 0.8rem; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .countdown-grid { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+<!-- ── HERO ── -->
+<section class="hero">
+  <img src="cropped-repeat-border-edge-1.png" alt="" aria-hidden="true" style="position: absolute; top:0%; width: 100%;" />
+
+  <!-- Heart-shaped photo background -->
+  <div class="hero-heart-bg">
+    <svg viewBox="0 0 500 460" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="heartClip">
+          <!-- Heart path centered in 500x460 viewBox -->
+          <path d="M250 410
+            C250 410 60 290 60 165
+            C60 100 110 55 175 55
+            C210 55 240 75 250 90
+            C260 75 290 55 325 55
+            C390 55 440 100 440 165
+            C440 290 250 410 250 410Z"/>
+        </clipPath>
+      </defs>
+
+      <!-- Photo clipped to heart shape — replace the image href with your own photo URL -->
+      <image
+        href="alex_yeya.jpeg"
+        x="60" y="55" width="380" height="360"
+        clip-path="url(#heartClip)"
+        preserveAspectRatio="xMidYMid slice"
+      />
+
+      <!-- Warm overlay inside heart -->
+      <path d="M250 410
+        C250 410 60 290 60 165
+        C60 100 110 55 175 55
+        C210 55 240 75 250 90
+        C260 75 290 55 325 55
+        C390 55 440 100 440 165
+        C440 290 250 410 250 410Z"
+        fill="url(#heartVignette)"/>
+
+      <!-- Gold outline border of heart -->
+      <path d="M250 410
+        C250 410 60 290 60 165
+        C60 100 110 55 175 55
+        C210 55 240 75 250 90
+        C260 75 290 55 325 55
+        C390 55 440 100 440 165
+        C440 290 250 410 250 410Z"
+        stroke="url(#heartBorder)" stroke-width="1.5" fill="none"/>
+    </svg>
+  </div>
+
+  <!-- Floral ornament SVG -->
+  <svg class="ornament" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M100 30 C90 10 60 5 40 20 C60 18 80 25 100 30Z" fill="#C4967A" opacity="0.5"/>
+    <path d="M100 30 C110 10 140 5 160 20 C140 18 120 25 100 30Z" fill="#C4967A" opacity="0.5"/>
+    <path d="M100 30 C85 40 70 55 55 52 C70 45 86 38 100 30Z" fill="#B8935A" opacity="0.4"/>
+    <path d="M100 30 C115 40 130 55 145 52 C130 45 114 38 100 30Z" fill="#B8935A" opacity="0.4"/>
+    <path d="M80 28 C74 20 60 18 52 24 C62 22 72 25 80 28Z" fill="#E8D5C4" opacity="0.6"/>
+    <path d="M120 28 C126 20 140 18 148 24 C138 22 128 25 120 28Z" fill="#E8D5C4" opacity="0.6"/>
+    <circle cx="100" cy="30" r="5" fill="#B8935A" opacity="0.8"/>
+    <circle cx="100" cy="30" r="2.5" fill="#FAF6F0"/>
+    <circle cx="40" cy="21" r="3" fill="#C4967A" opacity="0.5"/>
+    <circle cx="160" cy="21" r="3" fill="#C4967A" opacity="0.5"/>
+    <!-- thin stem lines -->
+    <line x1="20" y1="30" x2="180" y2="30" stroke="#C4967A" stroke-width="0.5" opacity="0.3"/>
+    <line x1="8" y1="30" x2="20" y2="30" stroke="#B8935A" stroke-width="1" opacity="0.5"/>
+    <line x1="192" y1="30" x2="180" y2="30" stroke="#B8935A" stroke-width="1" opacity="0.5"/>
+  </svg>
+
+  <p class="hero-overline">Nuestra boda</p>
+
+  <h1 class="hero-names">
+    Abigail<br>
+    <span class="ampersand">&amp;</span>
+    Alexis
+  </h1>
+
+  <div class="divider-line"><div class="divider-diamond"></div></div>
+
+  <p class="hero-date">Veinticinco de Julio de dos mil veintiseis</p>
+  <p class="hero-subdate">Te invitamos</p>
+</section>
+
+<!-- ── COUNTDOWN ── -->
+<section class="countdown-section">
+  <p class="countdown-label">Conteo regresivo para siempre</p>
+  <div class="countdown-grid">
+    <div class="countdown-unit">
+      <span class="countdown-num" id="cd-days">—</span>
+      <span class="countdown-word">Días</span>
+    </div>
+    <div class="countdown-unit">
+      <span class="countdown-num" id="cd-hours">—</span>
+      <span class="countdown-word">Horas</span>
+    </div>
+    <div class="countdown-unit">
+      <span class="countdown-num" id="cd-mins">—</span>
+      <span class="countdown-word">Minutos</span>
+    </div>
+    <div class="countdown-unit">
+      <span class="countdown-num" id="cd-secs">—</span>
+      <span class="countdown-word">Segundos</span>
+    </div>
+  </div>
+</section>
+
+<!-- ── DETAILS ── -->
+<section class="details">
+  <p class="section-label">Celebración</p>
+  <h2 class="section-title">Acompáñanos</h2>
+
+  <div class="cards-grid">
+
+    <!-- Date card -->
+    <div class="detail-card">
+      <svg class="card-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+        <rect x="4" y="7" width="28" height="24" rx="1" stroke="#C4967A" stroke-width="1"/>
+        <line x1="4" y1="14" x2="32" y2="14" stroke="#C4967A" stroke-width="1"/>
+        <line x1="12" y1="4" x2="12" y2="10" stroke="#C4967A" stroke-width="1.5" stroke-linecap="round"/>
+        <line x1="24" y1="4" x2="24" y2="10" stroke="#C4967A" stroke-width="1.5" stroke-linecap="round"/>
+        <circle cx="18" cy="22" r="2" fill="#B8935A"/>
+      </svg>
+      <p class="card-label">Fecha</p>
+      <p class="card-main">25/07/2026</p>
+      <p class="card-sub"><a href="https://wa.me/+529541836532?text=Confirmo%20mi%20asistencia%20a%20la%20boda" target="_blank">Confirmar asistencia</a></p>
+    </div>
+
+    <!-- Venue card -->
+    <div class="detail-card">
+      <svg class="card-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+        <path d="M18 4C13.03 4 9 8.03 9 13C9 20 18 32 18 32C18 32 27 20 27 13C27 8.03 22.97 4 18 4Z" stroke="#C4967A" stroke-width="1"/>
+        <circle cx="18" cy="13" r="4" stroke="#C4967A" stroke-width="1"/>
+      </svg>
+      <p class="card-label">Lugar</p>
+      <p class="card-main">Colonia Libertad</p>
+      <p class="card-sub"><a href="https://maps.app.goo.gl/AtDrJVHsWFy3pj8WA" target="_blank">Ver ubicación</a></p>
+    </div>
+
+    <!-- Dress code card -->
+    <div class="detail-card">
+      <svg class="card-icon" width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+        <path d="M13 6 L9 14 L14 14 L14 30 L22 30 L22 14 L27 14 L23 6 C21 9 15 9 13 6Z" stroke="#C4967A" stroke-width="1" stroke-linejoin="round"/>
+      </svg>
+      <p class="card-label">Vestimenta</p>
+      <p class="card-main">Formal o cocktail</p>
+      <p class="card-sub">Zona al aire libre</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="divider-line" style="margin-bottom:2rem;"><div class="divider-diamond"></div></div>
+  <p class="footer-names">Abigail &amp; Alexis</p>
+  <p class="footer-note">Con amor &nbsp;·&nbsp; Julio 2026</p>
+</footer>
+
+<script>
+  const weddingDate = new Date('2026-07-25T16:00:00');
+
+  function update() {
+    const now = new Date();
+    const diff = weddingDate - now;
+    if (diff <= 0) {
+      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '0');
+      return;
+    }
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
+    document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+    document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
+    document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
+  }
+
+  update();
+  setInterval(update, 1000);
+</script>
+
+</body>
+</html>
